@@ -62,7 +62,7 @@ bool CommunicationService::GetStartupSolution()
     ifstream myfile (s_response_file);
     if (!myfile.is_open())
     {
-        cerr<<"File already opened!"<<endl;
+        cerr<<"Response from serve file not found or already opened!"<<endl;
         myfile.close();
         return false;
     }

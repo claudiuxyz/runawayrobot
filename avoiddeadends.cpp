@@ -19,13 +19,13 @@ bool AvoidDeadEnds::ApplyAlgorithm()
     {
         for(int offsetRow = 0; offsetRow < D; offsetRow++)
         {
-            int offsetCol = D - offsetRow - 1;
+            int offsetCol = D - offsetRow;
             if((*m_board)(offsetRow, offsetCol) == '.')
             {
                 m_board->RestoreData();
                 m_board->MergeFromOffset(offsetRow, offsetCol, D);
-                //cout << m_board;
-                //MarkDeadEnds();
+//                cout << m_board;
+//                MarkDeadEnds();
                 PostMarkDeadEnds();
                 //cout << m_board;
                 if(Search(D) == true)
