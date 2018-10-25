@@ -14,10 +14,10 @@ int main(int argc, char** argv)
     bool allLevelResolved = false;
     while (allLevelResolved == false)
     {
-        if (c.GetStartupSolution() == false)
-        {
-            return(0);
-        }
+//        if (c.GetStartupSolution() == false)
+//        {
+//            return(0);
+//        }
         if (g.GetBoardInfoFromFile() != true)
         {
             return(0);
@@ -25,12 +25,12 @@ int main(int argc, char** argv)
         bool solutionFound = g.FindSolution();
         if(solutionFound)
         {
-            //return(0);
+            return(0);
             c.SendSolution(g.GetSolution());
             if(c.EvaluateAnswer() == CommunicationService::SolutionNOK)
             {
                 cout<<"Level "<<g.GetCurrentLevel()<<" could not be solved"<<endl;
-                g.PrintBoard();
+                //g.PrintBoard();
                 break;
             }
         }

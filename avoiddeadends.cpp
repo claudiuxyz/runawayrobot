@@ -24,9 +24,9 @@ bool AvoidDeadEnds::ApplyAlgorithm()
             {
                 m_board->RestoreData();
                 m_board->MergeFromOffset(offsetRow, offsetCol, D);
-//                cout << m_board;
+                cout << m_board;
 //                MarkDeadEnds();
-                PostMarkDeadEnds();
+               // PostMarkDeadEnds();
                 //cout << m_board;
                 if(Search(D) == true)
                 {
@@ -143,15 +143,15 @@ bool AvoidDeadEnds::Search(int pathLength)
         {
             if (VerifySolution(tile) == true)
             {
+                m_solutionPath=tile->GetPath();
                 cout<<"Solution found: "<<m_solutionPath<<endl;
                 solutionFound = true;
                 break;
             }
             else
             {
-                tile->DropAllCheckedDirections();
-                //cout << tile->GetPath() << endl;
-                direction = Down;
+                solutionFound = false;
+                break;
             }
         }
         else if (tile->GetType() == Tile::Empty)

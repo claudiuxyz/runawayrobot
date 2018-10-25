@@ -12,7 +12,7 @@ bool Algorithm::VerifySolution(const Tile* tileToVerify)
     bool solutionFound = false;
     Tile* tile = m_board->CreateTile();
     *tile = *tileToVerify;
-    tile->DoubleThePath();
+    //tile->DoubleThePath();
     bool shouldSearch = true;
     while (shouldSearch == true)
     {
@@ -36,7 +36,7 @@ bool Algorithm::VerifySolution(const Tile* tileToVerify)
     if (solutionFound)
     {
         m_solutionPath.assign(tile->GetPath());
-        DrawSolution();
+        //DrawSolution();
         //cout << m_board;
     }
     delete(tile);
