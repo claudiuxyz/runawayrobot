@@ -7,17 +7,16 @@ Algorithm::~Algorithm()
 
 }
 
-bool Algorithm::VerifySolution(std::string s)
+bool Algorithm::VerifySolution(const Tile* tileToVerify)
 {
     bool solutionFound = false;
     Tile* tile = m_board->CreateTile();
-
-    tile->SetPath(s);
+    *tile = *tileToVerify;
+    tile->DoubleThePath();
     bool shouldSearch = true;
-    int idx = 0;
     while (shouldSearch == true)
     {
-        if (!tile->Next(s.at(idx)))
+        if (!tile->Next())
         {
             cerr << "Next: Internal Error!" << endl;
             break;
@@ -33,17 +32,12 @@ bool Algorithm::VerifySolution(std::string s)
             shouldSearch = false;
             solutionFound = true;
         }
-        idx++;
-        if (idx > s.size() - 1)
-        {
-            idx = 0;
-        }
     }
     if (solutionFound)
     {
-        m_solutionPath.assign(s);
+        m_solutionPath.assign(tile->GetPath());
         DrawSolution();
-        cout << m_board;
+        //cout << m_board;
     }
     delete(tile);
     return solutionFound;
@@ -71,7 +65,7 @@ bool Algorithm::VerifySubSolution(string s)
         int idx = 0;
         while (shouldSearch == true)
         {
-            if(!tile->Next(subPath.at(idx)))
+            if(!tile->Next())
             {
                 cerr<<"Next: Internal Error!"<<endl;
                 break;
@@ -107,10 +101,6 @@ bool Algorithm::VerifySubSolution(string s)
 
 bool Algorithm::VerifySolution2(string str)
 {
-    if(m_board->GetLevel() < 30)
-    {
-        return VerifySolution(str);
-    }
     string start = str.substr(0, c_extraMoves);
     size_t pos = str.find(start, m_board->GetSolLengthMin()-1);
     if (pos == std::string::npos)

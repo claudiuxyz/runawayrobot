@@ -1,8 +1,9 @@
 #include "tile.h"
 
 using namespace std;
-Tile::Tile(Board* board):
-    m_face('.')
+Tile::Tile(Board* board) :
+    m_face('.'),
+    m_iterator(-1)
 {
     m_board = board;
 }
@@ -29,14 +30,18 @@ void Tile::SetPosition(int row, int col)
     }
 }
 
-bool Tile::Next(char direction)
+bool Tile::Next()
 {
-    if(direction == 'R')
+    m_iterator++;
+    if (m_iterator == m_path.size())
+    {
+        m_iterator = 0;
+    }
+    if(m_path.at(m_iterator) == 'R')
     {
         return GoRight();
-    }
-
-    if(direction == 'D')
+    } 
+    else
     {
         return GoDown();
     }
@@ -111,6 +116,11 @@ bool Tile::DropAllCheckedDirections()
     return true;
 }
 
+void Tile::DoubleThePath()
+{
+    SetPath(m_path + m_path);
+}
+
 void Tile::PathToPosition()
 {
     m_position.Line = 0;
@@ -172,4 +182,15 @@ void Tile::SetType(Tile::TileType type)
     {
         m_board->MarkVisited(m_position);
     }
+}
+
+Tile & Tile::operator=(const Tile & other)
+{
+    if (this != &other)
+    {
+        m_path = other.m_path;
+        m_position = other.m_position;
+        m_face = other.m_face;
+    }
+    return *this;
 }

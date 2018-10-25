@@ -17,7 +17,7 @@ public:
     virtual ~Algorithm();
     void SetBoard(Board* board) { m_board = board; }
     std::string GetSolution() const { return m_solutionPath; }
-    bool VerifySolution(std::string s);
+    bool VerifySolution(const Tile * tileToVerify);
     bool VerifySubSolution(std::string s);
     bool VerifySolution2(std::string s);
     void DrawSolution();

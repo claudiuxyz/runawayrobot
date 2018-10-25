@@ -107,6 +107,7 @@
     <ClCompile Include="gameop.cpp" />
     <ClCompile Include="lazzybacktracking.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="position.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tools.cpp" />
   </ItemGroup>

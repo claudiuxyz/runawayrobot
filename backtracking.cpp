@@ -34,7 +34,7 @@ bool Backtracking::ApplyAlgorithm()
             //cout<<counter<<": "<<tile->GetPath()<<endl;
             //cout<<tile->GetPath()<<endl;
 
-            if (VerifySolution(tile->GetPath()) == true)
+            if (VerifySolution(tile) == true)
             {
                 cout<<"Solution found: "<<m_solutionPath<<endl;
                 solutionFound = true;

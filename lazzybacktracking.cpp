@@ -24,7 +24,7 @@ bool LazzyBacktracking::ApplyAlgorithm()
         tile->SetPath(candidate);
         if(tile->GetType() == Tile::Exit || (tile->GetType() == Tile::Empty && candidate.size() >= m_board->GetSolLengthMax()))
         {
-            if (VerifySolution(candidate) == true)
+            if (VerifySolution(tile) == true)
             {
                 cout<<"Solution found: "<<m_solutionPath<<endl;
                 solutionFound = true;

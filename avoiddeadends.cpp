@@ -141,7 +141,7 @@ bool AvoidDeadEnds::Search(int pathLength)
         }
         if((tile->GetType() == Tile::Exit || (tile->GetType() == Tile::Empty && tile->GetPath().size() >= pathLength)))
         {
-            if (VerifySolution(tile->GetPath()) == true)
+            if (VerifySolution(tile) == true)
             {
                 cout<<"Solution found: "<<m_solutionPath<<endl;
                 solutionFound = true;
@@ -150,6 +150,7 @@ bool AvoidDeadEnds::Search(int pathLength)
             else
             {
                 tile->DropAllCheckedDirections();
+                //cout << tile->GetPath() << endl;
                 direction = Down;
             }
         }
