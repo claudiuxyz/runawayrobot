@@ -68,8 +68,10 @@ Board Board::operator+(const Board &board) const
 
 void Board::MergeFromOffset(int offsetRow, int offsetCol, int wide)
 {
+    //cout << "Offset r=" << offsetRow << ", c=" << offsetCol << endl;
     for(int crtOffsetRow = offsetRow, crtOffsetCol = offsetCol; crtOffsetRow <= m_boardX && crtOffsetCol<= m_boardY; crtOffsetRow+=offsetRow, crtOffsetCol+= offsetCol)
     {
+        //cout << "===> Offset r=" << crtOffsetRow << ", c=" << crtOffsetCol << endl;
         for (int i = crtOffsetRow; i < wide+crtOffsetRow; i++)
         {
             for (int j = crtOffsetCol; j < wide+crtOffsetCol; j++)

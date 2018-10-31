@@ -9,22 +9,23 @@ AvoidDeadEnds::AvoidDeadEnds()
 
 bool AvoidDeadEnds::ApplyAlgorithm()
 {
-    cout<<m_board;
+    //cout<<m_board;
     MarkDeadEnds();
     bool needProcessing = true;
     PostMarkDeadEnds();
-    cout<<m_board;
+    //cout<<m_board;
     m_board->BackupData();
     for(int D = m_board->GetSolLengthMin(); D <= m_board->GetSolLengthMax(); D++)
     {
         for(int offsetRow = 0; offsetRow < D; offsetRow++)
         {
             int offsetCol = D - offsetRow;
+            m_board->RestoreData();
             if((*m_board)(offsetRow, offsetCol) == '.')
             {
-                m_board->RestoreData();
+                
                 m_board->MergeFromOffset(offsetRow, offsetCol, D);
-                cout << m_board;
+                //cout << m_board;
 //                MarkDeadEnds();
                // PostMarkDeadEnds();
                 //cout << m_board;
@@ -34,7 +35,7 @@ bool AvoidDeadEnds::ApplyAlgorithm()
                 }
                 else
                 {
-                    cerr << "No solution found, sol length = " << D <<", r = "<<offsetRow<<", col = "<<offsetCol<<endl;
+                    //cerr << "No solution found, sol length = " << D <<", r = "<<offsetRow<<", col = "<<offsetCol<<endl;
                 }
             }
         }
@@ -150,8 +151,9 @@ bool AvoidDeadEnds::Search(int pathLength)
             }
             else
             {
-                solutionFound = false;
-                break;
+                tile->DropAllCheckedDirections();
+                //cout << tile->GetPath() << endl;
+                direction = Down;
             }
         }
         else if (tile->GetType() == Tile::Empty)

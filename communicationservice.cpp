@@ -15,13 +15,18 @@ CommunicationService::CommunicationService()
 }
 
 void CommunicationService::SendSolution(){
-    std::string command = "wget -q -R .gif -R .jpg -R .png  -O ";
-    m_solution.append("\"http://www.hacker.org/runaway/index.php?name=claudiuxyz&password=cb312959&path=");
+    std::string command = "wget -q -R .gif -R .jpg -R .png -i ";
+    m_solution.append("http://www.hacker.org/runaway/index.php?name=claudiuxyz&password=cb312959&path=");
     m_solution.append( m_solutionPath );
-    m_solution.append("\"");
+    //m_solution.append("");
+    ofstream solutionFile;
+    solutionFile.open(s_solution_file, ios::in | ios::trunc);
+    solutionFile << m_solution;
+    solutionFile.close();
+
+    command.append(s_solution_file);
+    command.append(" -O ");
     command.append( s_response_file );
-    command.append( " ");
-    command.append( m_solution );
     system((const char*)command.c_str());
 }
 
@@ -59,6 +64,7 @@ void CommunicationService::SendSolution(string s){
 
 bool CommunicationService::GetStartupSolution()
 {
+    m_solution.clear();
     ifstream myfile (s_response_file);
     if (!myfile.is_open())
     {
